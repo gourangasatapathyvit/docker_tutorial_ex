@@ -8,8 +8,7 @@ final command -
 
  - Install Node.js
  - cd into folder
- - npm install
- - node index.js
+ - npm install (for development mode)
 
 
 ## Solution
