@@ -1,0 +1,38 @@
+version: 1.0.0
+services:
+  
+  testapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: development
+    image: testapp
+
+  mongo:
+    image: mongo
+    container_name: netvolmongo
+    volumes:
+      - netvolmongo:/data/db
+    networks:
+      - net1
+    ports:
+      - 27017:27017
+  
+  tapp:
+    image: testapp
+    environment:
+      - MONGO_URI=mongodb://netvolmongo:27017/mydatabase'
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - net1
+    ports:
+      - 3000:3000
+    container_name: tapp
+
+networks:
+  net1:
+
+volumes:
+  netvolmongo:
+  
