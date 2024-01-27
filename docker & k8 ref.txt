@@ -65,7 +65,3 @@ kubectl describe service nginx-service
 kubectl get pod -o wide 
 to see status - kubectl get deployment nginx-deployment -o yaml
 
-
-OpenRouter  - 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
-
-openai - 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
