@@ -6,6 +6,9 @@ final command -
 
  - docker run -v mongovol --network net1 -p 27017:27017 --name netvolmongo -d mongo
 
+###Minikube IP not accessible
+ - minikube service webapp-service
+
  ###reference
 
  1. https://kubernetes.io/
