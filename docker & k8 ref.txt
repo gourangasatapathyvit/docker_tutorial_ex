@@ -1,0 +1,71 @@
+docker - 
+build a Docker image from a Dockerfile - docker build . -t test_app
+docker images
+docker ps
+docker run -p 3000:3000 test_app   (browser:container)
+
+explore base image - docker run -it --rm <image id> /bin/sh OR docker exec -it <container ID> /bin/bash
+create volume - docker volume create myVolume
+use volume - docker run -v myVolume:/data/db -p 3000:3000 test_app
+run an existing container - docker start <container ID>
+
+create network  - docker network create net1
+DB - docker run -v mongovol --network net1 -p 27017:27017 --name mymongo -d mongo
+backend - docker run --network net1 -p 3000:3000 mongotestapp
+
+env variable - docker run --network net1 -p 3000:3000 -e MONGO_URI="mongodb://mymongo:27017/mydatabase" mongotestapp
+
+
+hot reload - multi stage build - <mode-twoway>
+docker build --target=development . -t mongotestap
+docker run --network net1 -p 3000:3000 -e MONGO_URI="mongodb://mymongo:27017/mydatabase" -v .:/usr/src/app  mongotestap
+
+final command - 
+docker build --target=development . -t testapp 
+docker run -v mongovol --network net1 -p 27017:27017 --name netvolmongo -d mongo
+dev mode - docker run --network net1 -e MONGO_URI="mongodb://netvolmongo:27017/mydatabase" -p 3000:3000 -v .:/usr/src/app --name tapp testapp
+==============================================================================================
+
+
+Kubernetes (to manage large number of container) -
+
+adv - scalability,no down time, back up & restore
+
+ 
+minikube - (cluster) - 
+Minikube is a tool that allows you to run Kubernetes clusters locally on your machine. 
+It's designed to help developers and system administrators set up and 
+test Kubernetes applications without the need for a full-scale production cluster.
+
+start minikube- minikube start --driver=docker
+start minikube- see minikube running status
+lunch dashboard- minikube dashboard 
+minikube stop - to stop munikube
+minikube delete - to delete the cluster
+
+  
+kubectl command
+create deployment - kubectl create deployment nginx-server --image=nginx
+replica - kubectl get replicaset
+
+deployment logs - kubectl describe deployment nginx-server
+pod logs- kubectl describe pod nginx-server
+edit deployent file  - kubectl edit deployment nginx-server
+check logs of the POD - kubectl logs <pod name>
+debug inside container - kubectl exec -it nginx-server-5b449b7d77-742l9 -- bin/bash
+delete deployment - >kubectl delete deployment nginx-server
+
+
+
+from YAML file - 
+kubectl apply -f .\nginx-deployment.yaml
+kubectl apply -f .\nginx-service.yaml
+kubectl get service
+kubectl describe service nginx-service
+kubectl get pod -o wide 
+to see status - kubectl get deployment nginx-deployment -o yaml
+
+
+OpenRouter  - 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
+
+openai - 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
