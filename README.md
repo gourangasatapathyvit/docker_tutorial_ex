@@ -6,12 +6,8 @@ final command -
 
  - docker run -v mongovol --network net1 -p 27017:27017 --name netvolmongo -d mongo
 
- - Install Node.js
- - cd into folder
- - npm install (for development mode)
+ ###reference
 
-
-## Solution
-The solution to the assignment is that we first copy over package.json and package-lock.json , run npm install followed by copying over the code
-
-This way, the layer which runs npm install can be cached until package.json isn't changed, which doesn't happen very often in the lifecycle of a project
+ 1. https://kubernetes.io/
+ 2. https://gitlab.com/nanuchi/k8s-in-1-hour
+ 3. https://gitlab.com/nanuchi/developing-with-docker
