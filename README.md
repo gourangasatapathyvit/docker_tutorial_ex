@@ -2,9 +2,14 @@ final command -
 
  - docker build --target=development . -t testapp 
 
- - dev mode - docker run --network net1 -e MONGO_URI="mongodb://netvolmongo:27017/mydatabase" -p 3000:3000 -v .:/usr/src/app --name tapp testapp
+- docker network create net1
 
- - docker run -v mongovol --network net1 -p 27017:27017 --name netvolmongo -d mongo
+ ## imp - create with uniqname likw - "netvolmongo"
+ - docker run -v mongovol:/data/db --network net1 -p 27017:27017 --name netvolmongo -d mongo
+
+### use "netvolmongo" at mongouri to use the volume
+ - dev mode - docker run --network net1 -e MONGO_URI="mongodb://netvolmongo:27017/mydatabase" -p 3000:3000 -v $(pwd):/usr/src/app --name tapp testapp
+
 
 ###Minikube IP not accessible
  - minikube service webapp-service
